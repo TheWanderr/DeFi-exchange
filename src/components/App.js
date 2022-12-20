@@ -1,11 +1,25 @@
-import { useEffect } from 'react'
+import { useEffect } from 'react';
+import { ethers } from 'ethers';
+import TOKEN_ABI from '../abis/Token.json';
+import config from '../config.json';
 import '../App.css';
-
 
 function App() {
   const loadBlockchainData = async () => {
     const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' })
-    console.log(accounst[0])
+    console.log(accounts[0])
+
+    //Connect ethers to blockchain(Metamask)
+    const provider = new ethers.providers.Web3Provider(window.ethereum)
+    const { chainId } = await provider.getNetwork()
+    console.log(chainId)
+
+    //Token smart token
+    const token = new ethers.Contract(config[chainId].blu.address, TOKEN_ABI, provider)
+    console.log(token.address)
+
+    const symbol = await token.symbol()
+    console.log(symbol)
   }
 
   useEffect(() => {
