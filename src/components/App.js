@@ -2,7 +2,9 @@ import { useEffect } from 'react';
 import { useDispatch } from 'react-redux'
 import config from '../config.json';
 import { loadProvider, loadNetwork, loadAccount, loadTokens, loadExchange } from '../store/interactions';
+
 import Navbar from './Navbar'
+import Markets from './Markets'
 
 function App() {
   const dispatch = useDispatch()
@@ -11,7 +13,7 @@ function App() {
     //Connect ethers to blockchain(Metamask)
     const provider = loadProvider(dispatch)
 
-    //Fetch current networks chainId (e.g. hardhat: 31337, kovan: 42)
+    //Fetch current networks chainId (e.g. hardhat: 31337, Goerli: 5, Sepolia: 11155111)
     const chainId = await loadNetwork(provider, dispatch)
 
     //Reload page when network changes
@@ -47,7 +49,7 @@ function App() {
       <main className='exchange grid'>
         <section className='exchange__section--left grid'>
 
-          {/* Markets */}
+          <Markets />
 
           {/* Balance */}
 
