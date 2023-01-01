@@ -70,7 +70,6 @@ export const subscribeToEvents = (exchange, dispatch) => {
 LOAD USER BALANCES (WALLET & EXCHANGE BALANCES)
 ---------------------------------------------*/
 
-
 export const loadBalances = async (exchange, tokens, account, dispatch) => {
   let balance = ethers.utils.formatUnits(await tokens[0].balanceOf(account), 18)
   dispatch({ type: 'TOKEN_1_BALANCE_LOADED', balance })
@@ -83,8 +82,35 @@ export const loadBalances = async (exchange, tokens, account, dispatch) => {
 
   balance = ethers.utils.formatUnits(await exchange.balanceOf(tokens[1].address, account), 18)
   dispatch({ type: 'EXCHANGE_TOKEN_2_BALANCE_LOADED', balance })
-
 }
+
+/*----------------------------
+-------LOAD ALL ORDERS--------
+----------------------------*/
+
+export const loadAllOrders = async (provider, exchange, dispatch) => {
+
+  const block = await provider.getBlockNumber()
+
+  // Fetch canceled orders
+  const cancelStream = await exchange.queryFilter('Cancel', 0, block)
+  const cancelledOrders = cancelStream.map(event => event.args)
+
+  dispatch({ type: 'CANCELLED_ORDERS_LOADED', cancelledOrders })
+
+  // Fetch filled orders
+  const tradeStream = await exchange.queryFilter('Trade', 0, block)
+  const filledOrders = tradeStream.map(event => event.args)
+
+  dispatch({ type: 'FILLED_ORDERS_LOADED', filledOrders })
+
+  // Fetch all orders
+  const orderStream = await exchange.queryFilter('Order', 0, block)
+  const allOrders = orderStream.map(event => event.args)
+
+  dispatch({ type: 'ALL_ORDERS_LOADED', allOrders })
+}
+
 
 /*-----------------------------------
 TRANSFER TOKENS (DEPOSIT & WITHDRAWS)
@@ -99,7 +125,7 @@ export const transferTokens =  async (provider, exchange, transferType, token, a
     const signer = await provider.getSigner()
     const amountToTransfer = ethers.utils.parseUnits(amount.toString(), 18)
 
-    if(transferType === 'Deposit') {
+    if (transferType === 'Deposit') {
       transaction = await token.connect(signer).approve(exchange.address, amountToTransfer)
       await transaction.wait()
       transaction = await exchange.connect(signer).depositToken(token.address, amountToTransfer)
@@ -108,7 +134,6 @@ export const transferTokens =  async (provider, exchange, transferType, token, a
     }
 
     await transaction.wait()
-
   } catch(error) {
     dispatch({ type: 'TRANSFER_FAIL' })
   }
