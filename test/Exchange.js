@@ -6,9 +6,14 @@ const tokens = (n) => {
 
 describe('Exchange', () => {
   let deployer,
+    user1, 
+    user2,
     exchange,
+    token1, 
+    token2,
     feeAccount,
     transaction;
+    
   const feePercent = 10;
 
   beforeEach(async () => {
