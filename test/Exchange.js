@@ -5,14 +5,7 @@ const tokens = (n) => {
 }
 
 describe('Exchange', () => {
-  let deployer,
-    user1, 
-    user2,
-    exchange,
-    token1, 
-    token2,
-    feeAccount,
-    transaction;
+  let deployer, feeAccount, user1, user2, exchange, token1, token2, transaction;
     
   const feePercent = 10;
 

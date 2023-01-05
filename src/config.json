@@ -19,23 +19,43 @@
 		"explorerURL": "#"
 	},
 
-	"11155111": {
+	"5": {
 		"exchange" : {
-			"address" : "0xCf7Ed3AccA5a467e9e704C703E8D87F634fB0Fc9" 
+			"address" : "0x2c3A6Cd34B763642567f59B1c13B7b5Bd269F621" 
 		},
 
 		"blu" : {
-			"address" : "0x5FbDB2315678afecb367f032d93F642f64180aa3" 
+			"address" : "0x94e219A4FCA9943336a93D256B8c852cA8f4cfBE" 
 		},
 
 		"mETH" : {
-			"address" : "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512" 
+			"address" : "0x7454e194441874480EF6856BB4B58C3118e30BB5" 
+		},
+		
+		"cUSD" : {
+			"address" : "0x2e5a5D90A904E9a6264e66402c621511C2789B5A" 
+		},
+		
+		"explorerURL": "https://goerli.etherscan.io/"
+	},
+
+	"80001": {
+		"exchange" : {
+			"address" : "0x616e75542Be86D3806Ef0fD75AbaFB8bb47F89De" 
+		},
+
+		"blu" : {
+			"address" : "0x599306C3ddd96331bBE8d80E70433a8A5E32a672" 
+		},
+
+		"mETH" : {
+			"address" : "0x01a60FeE78CA1E26BC9fED13419e23FDae2D6515" 
 		},
 
 		"cUSD" : {
-			"address" : "0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0" 
+			"address" : "0xce4df50ec3d4577bB044E6feA1884ac8B2f1143D" 
 		},
-		
-		"explorerURL": "https://sepolia.etherscan.io/"
+
+		"explorerURL": "https://mumbai.polygonscan.io/"
 	}
 }
