@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
+import { Helmet } from "react-helmet";
 import config from '../config.json';
 import { loadProvider, loadNetwork, loadAccount, loadTokens, loadExchange, loadAllOrders, subscribeToEvents } from '../store/interactions';
 
@@ -55,6 +56,13 @@ function App() {
 
   return (
     <div>
+
+      <Helmet>
+        <meta charSet="utf-8"/>
+        <title>Cobolt BLU Exchange</title>
+        <link rel="canonical" href="https://little-rain-9998.on.fleek.co/" />
+        <meta name="description" content="Token Trade Exchange" />
+      </Helmet>
 
       <Navbar />
 
